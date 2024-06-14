@@ -3,7 +3,7 @@
     include("../database.php");
     include("signup.html");
 
-
+    //creates a user
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(isset($_POST["return"])){
             header("Location: ../index/index.php");
@@ -13,7 +13,6 @@
             $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
             $_SESSION["username"] = $username;
-            $_SESSION["password"] = $password;
             
             $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
 
@@ -22,6 +21,7 @@
             echo "You signed up";
            }
            catch(mysqli_sql_exception){echo "error importing data";}
+           header("Location: ../login/login.php");
         }
     }
 
